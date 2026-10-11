@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>车辆详情 - 优车汇二手车</title>
+<meta name="description" content="二手车车辆详情页，含实拍多角度图集、全款价与分期首付月供明细、车辆档案参数、259项第三方检测报告、一年质保服务说明及金融分期计算器。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="list">
+
+<!-- ============ 顶部导航 ============ -->
+<header id="siteHeader"></header>
+
+<main class="page-main">
+  <div class="container" style="padding-top:14px;padding-bottom:60px">
+
+    <!-- 面包屑 -->
+    <nav class="breadcrumb">
+      <a href="index.html">首页</a><span class="sep">/</span>
+      <a href="list.html">买车</a><span class="sep">/</span>
+      <a href="list.html" id="crumbBrand">品牌车源</a><span class="sep">/</span>
+      <span id="crumbName">车辆详情</span>
+    </nav>
+
+    <!-- ===================== 顶部：图集 + 报价面板 ===================== -->
+    <div class="detail-top">
+
+      <!-- 左侧：大图轮播 -->
+      <div class="gallery">
+        <div class="gallery-main" id="galleryMain">
+          <img id="galleryImg" src="" alt="车辆实拍大图">
+          <span class="gallery-counter" id="galleryCounter">1 / 6</span>
+          <span class="zoom-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+            点击查看大图
+          </span>
+          <button class="gallery-nav prev" id="galleryPrev" aria-label="上一张">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="gallery-nav next" id="galleryNext" aria-label="下一张">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+      </div>
+
+      <!-- 右侧：报价 / 分期 / 操作 -->
+      <aside class="price-panel">
+        <h1 class="pp-title" id="carName">车辆名称加载中…</h1>
+        <div class="pp-sub" id="carSubMeta"></div>
+
+        <div class="pp-price">
+          <div class="pp-total">
+            <span class="label">全款一口价</span>
+            <span class="value"><span class="num" id="carPrice">0.00</span><span class="unit">万</span></span>
+          </div>
+          <div class="pp-guide" id="carGuide"></div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px" id="carTags"></div>
+        </div>
+
+        <div class="pp-finance">
+          <div class="pp-fin-item">
+            <div class="num" id="finFirst">0.00<em>万</em></div>
+            <div class="label">首付 3 成</div>
+          </div>
+          <div class="pp-fin-item">
+            <div class="num" id="finMonth">0<em>元</em></div>
+            <div class="label">月供 36 期</div>
+          </div>
+        </div>
+
+        <div class="pp-actions">
+          <button class="btn btn-primary btn-block btn-full" data-book="" id="bookBtn">预约到店看车</button>
+          <button class="btn btn-outline" data-action="call">电话咨询</button>
+          <button class="btn btn-outline" data-action="lead">在线留资</button>
+        </div>
+        <div class="pp-actions-3">
+          <button class="btn btn-light btn-sm" data-action="calc">分期计算器</button>
+          <button class="btn btn-light btn-sm" id="favBtn" data-fav="">收藏该车</button>
+          <button class="btn btn-light btn-sm" id="shareBtn">分享给好友</button>
+        </div>
+
+        <div class="pp-assure">
+          <div class="pp-assure-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>259 项第三方检测合格，车况不符全额退</span>
+          </div>
+          <div class="pp-assure-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>一年或 2 万公里质保 · 全国联保</span>
+          </div>
+          <div class="pp-assure-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>7 天无理由退车 · 手续代办过户</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ===================== 车辆档案参数 ===================== -->
+    <section class="info-card">
+      <div class="info-card-head">
+        <h3>车辆档案参数</h3>
+        <span class="hint" id="vinHint">车架号已脱敏展示</span>
+      </div>
+      <div class="param-table" id="paramTable"></div>
+    </section>
+
+    <!-- ===================== Tabs：检测报告 / 质保服务 / 车况描述 ===================== -->
+    <section class="info-card">
+      <div class="tabs" id="detailTabs">
+        <button class="tab-btn active" data-tab="inspect">第三方检测报告</button>
+        <button class="tab-btn" data-tab="warranty">质保服务说明</button>
+        <button class="tab-btn" data-tab="desc">车况与手续描述</button>
+        <button class="tab-btn" data-tab="store">看车门店</button>
+      </div>
+
+      <!-- 检测报告 -->
+      <div class="tab-panel active" id="tab-inspect">
+        <div class="inspect-summary" id="inspectSummary"></div>
+        <div id="inspectGroups"></div>
+        <p class="calc-note">检测报告由具备资质的第三方检测机构出具，支持到店复核与第三方复检。若检测结论与实际车况不符，可申请全额退车并赔付检测费用。</p>
+      </div>
+
+      <!-- 质保服务 -->
+      <div class="tab-panel" id="tab-warranty">
+        <div class="param-table" id="warrantyTable"></div>
+        <div class="quote mt16" style="background:var(--bg-soft);border-left:3px solid var(--primary);border-radius:0 10px 10px 0;padding:16px 20px;font-size:14px;color:var(--text-2);line-height:1.9">
+          <b>质保范围：</b>发动机总成、变速箱总成、电控系统（新能源车型含三电系统）核心部件，质保期内因质量问题导致的维修费用由优车汇承担，全国 300+ 服务网点联保。<br>
+          <b>不适用范围：</b>人为损坏、交通事故、非授权改装、超保修里程、易损件（轮胎/刹车片/雨刮等）正常磨损。
+        </div>
+      </div>
+
+      <!-- 车况描述 -->
+      <div class="tab-panel" id="tab-desc">
+        <div id="carDesc"></div>
+      </div>
+
+      <!-- 看车门店 -->
+      <div class="tab-panel" id="tab-store">
+        <div class="store-detail" id="storeDetail"></div>
+      </div>
+    </section>
+
+    <!-- ===================== 金融分期计算器 ===================== -->
+    <section class="info-card" id="finance">
+      <div class="info-card-head">
+        <h3>金融分期计算器</h3>
+        <span class="hint">拖动首付比例与贷款年限，实时计算每月还款额（等额本息，年化利率 4.8%）</span>
+      </div>
+      <div class="calc">
+        <div id="calcInline"></div>
+        <div class="calc-result">
+          <h4>每月还款额（月供）</h4>
+          <div class="big" id="rMonth">0<em>元</em></div>
+          <div class="sub" id="rPlan">首付 30% · 贷款 3 年</div>
+          <div class="calc-breakdown">
+            <div class="calc-breakdown-row"><span class="k">车辆全款价</span><span class="v" id="rTotal">0.00 万</span></div>
+            <div class="calc-breakdown-row"><span class="k">首付金额</span><span class="v" id="rDown">0.00 万</span></div>
+            <div class="calc-breakdown-row"><span class="k">贷款本金</span><span class="v" id="rLoan">0.00 万</span></div>
+            <div class="calc-breakdown-row"><span class="k">贷款期数</span><span class="v" id="rTerms">36 期</span></div>
+            <div class="calc-breakdown-row"><span class="k">预计总利息</span><span class="v" id="rInterest">0.00 万</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="calc-note">* 以上计算结果仅供参考，实际月供以金融机构最终审批结果为准。优车汇支持首付 1 成起、最长 60 期，征信白户可申请，最快 1 小时出审批结果。</p>
+    </section>
+
+    <!-- ===================== 同款推荐 ===================== -->
+    <section class="info-card">
+      <div class="info-card-head">
+        <h3 id="recTitle">同款车源推荐</h3>
+        <a class="section-more" href="list.html" id="recMore">查看更多 →</a>
+      </div>
+      <div class="car-grid" id="recSame"></div>
+    </section>
+
+    <!-- ===================== 同价位推荐 ===================== -->
+    <section class="info-card">
+      <div class="info-card-head">
+        <h3>同价位代步车推荐</h3>
+        <span class="hint">相近预算的高性价比选择</span>
+      </div>
+      <div class="car-grid" id="recPrice"></div>
+    </section>
+
+  </div>
+</main>
+
+<!-- 详情页悬浮操作栏 -->
+<div class="float-bar">
+  <button class="float-btn primary" data-book="" id="floatBook">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3 11h18"/></svg>
+    预约看车
+  </button>
+  <button class="float-btn" data-action="call">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+    电话咨询
+  </button>
+  <button class="float-btn" id="floatFav">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+    收藏
+  </button>
+  <button class="float-btn" id="floatTop">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+    顶部
+  </button>
+</div>
+
+<!-- 分期计算弹窗（由价格面板「分期计算器」按钮触发） -->
+<div class="modal-mask" id="calcModal">
+  <div class="modal modal-lg">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">金融分期计算器</div>
+        <div class="modal-sub" id="calcModalSub">拖动首付比例与年限，实时查看月供明细</div>
+      </div>
+      <button class="modal-close" data-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="calc">
+        <div id="calcModalBody"></div>
+        <div class="calc-result">
+          <h4>每月还款额（月供）</h4>
+          <div class="big" id="mMonth">0<em>元</em></div>
+          <div class="sub" id="mPlan">首付 30% · 贷款 3 年</div>
+          <div class="calc-breakdown">
+            <div class="calc-breakdown-row"><span class="k">车辆全款价</span><span class="v" id="mTotal">0.00 万</span></div>
+            <div class="calc-breakdown-row"><span class="k">首付金额</span><span class="v" id="mDown">0.00 万</span></div>
+            <div class="calc-breakdown-row"><span class="k">贷款本金</span><span class="v" id="mLoan">0.00 万</span></div>
+            <div class="calc-breakdown-row"><span class="k">贷款期数</span><span class="v" id="mTerms">36 期</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-light" data-close>关闭</button>
+      <button class="btn btn-primary" data-action="lead">提交分期申请</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 页脚 ============ -->
+<footer id="siteFooter"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/detail.js"></script>
+</body>
+</html>

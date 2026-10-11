@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二手车源列表 - 严选车源在线选购 | 优车汇二手车</title>
+<meta name="description" content="优车汇二手车车源列表，支持品牌、车系、车型、上牌年份、行驶里程、价格区间、燃料类型、变速箱、过户次数、有无质保等多条件筛选，2万台严选车源实时在线。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="list">
+
+<!-- ============ 顶部导航 ============ -->
+<header id="siteHeader"></header>
+
+<main class="page-main">
+
+  <!-- ===================== 页面标题 + 面包屑 ===================== -->
+  <div class="page-hero">
+    <div class="container">
+      <h1 id="pageTitle">全国严选二手车源</h1>
+      <p id="pageDesc">共收录 2 万台 259 项检测合格车源，支持多条件精准筛选，车况透明可查</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:18px;padding-bottom:50px">
+
+    <!-- 面包屑 -->
+    <nav class="breadcrumb">
+      <a href="index.html">首页</a><span class="sep">/</span>
+      <a href="list.html">买车</a><span class="sep">/</span>
+      <span id="crumbNow">全部车源</span>
+    </nav>
+
+    <!-- ===================== 复合筛选组件 ===================== -->
+    <div class="filter-panel" id="filterPanel">
+      <!-- 一级：品牌 -->
+      <div class="filter-row" data-fkey="brand">
+        <div class="filter-key">品牌</div>
+        <div class="filter-val" id="filterBrand"></div>
+      </div>
+      <!-- 一级：车系 -->
+      <div class="filter-row" data-fkey="series">
+        <div class="filter-key">车系</div>
+        <div class="filter-val" id="filterSeries"></div>
+      </div>
+      <!-- 一级：车型 -->
+      <div class="filter-row" data-fkey="model">
+        <div class="filter-key">车型</div>
+        <div class="filter-val" id="filterModel"></div>
+      </div>
+      <!-- 二级：上牌年份 -->
+      <div class="filter-row" data-fkey="year">
+        <div class="filter-key">上牌年份</div>
+        <div class="filter-val" id="filterYear"></div>
+      </div>
+      <!-- 二级：行驶里程 -->
+      <div class="filter-row" data-fkey="mileage">
+        <div class="filter-key">行驶里程</div>
+        <div class="filter-val" id="filterMileage"></div>
+      </div>
+      <!-- 二级：价格区间（双向滑块） -->
+      <div class="filter-row" data-fkey="price">
+        <div class="filter-key">价格区间</div>
+        <div class="filter-val">
+          <div class="price-slider">
+            <div class="range-values">
+              <div class="range-box"><input type="number" id="priceMinInput" value="1"> <span>万</span></div>
+              <span style="color:var(--muted-2)">—</span>
+              <div class="range-box"><input type="number" id="priceMaxInput" value="80"> <span>万</span></div>
+              <span style="font-size:12.5px;color:var(--muted-2);margin-left:8px" id="priceTxt">1 - 80 万</span>
+            </div>
+            <div class="range-track" id="priceTrack">
+              <div class="range-fill" id="priceFill"></div>
+              <div class="range-thumb" id="priceThumbMin" data-thumb="min"></div>
+              <div class="range-thumb" id="priceThumbMax" data-thumb="max"></div>
+            </div>
+            <div class="range-scale"><span>1 万</span><span>20 万</span><span>40 万</span><span>60 万</span><span>80 万</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- 高级筛选（可折叠） -->
+      <div class="filter-adv" id="filterAdv">
+        <!-- 燃料类型 -->
+        <div class="filter-row" data-fkey="fuel">
+          <div class="filter-key">燃料类型</div>
+          <div class="filter-val" id="filterFuel"></div>
+        </div>
+        <!-- 变速箱 -->
+        <div class="filter-row" data-fkey="gear">
+          <div class="filter-key">变速箱</div>
+          <div class="filter-val" id="filterGear"></div>
+        </div>
+        <!-- 过户次数 -->
+        <div class="filter-row" data-fkey="transfer">
+          <div class="filter-key">过户次数</div>
+          <div class="filter-val" id="filterTransfer"></div>
+        </div>
+        <!-- 有无质保 -->
+        <div class="filter-row" data-fkey="warranty">
+          <div class="filter-key">质保服务</div>
+          <div class="filter-val" id="filterWarranty"></div>
+        </div>
+        <!-- 车源地 -->
+        <div class="filter-row" data-fkey="city">
+          <div class="filter-key">车源城市</div>
+          <div class="filter-val" id="filterCity"></div>
+        </div>
+      </div>
+      <!-- 展开更多条件 -->
+      <div class="filter-row" style="border-top:1px dashed var(--line)">
+        <div class="filter-key"></div>
+        <div class="filter-val">
+          <span class="filter-more-link" id="advToggle">展开更多筛选条件 ⌄</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 已选条件 -->
+    <div class="selected-bar" id="selectedBar"></div>
+
+    <!-- ===================== 排序栏 ===================== -->
+    <div class="sort-bar">
+      <div class="sort-list" id="sortList">
+        <span class="sort-item active" data-sort="new">最新上架</span>
+        <span class="sort-item" data-sort="priceAsc">低价优先</span>
+        <span class="sort-item" data-sort="priceDesc">高价优先</span>
+        <span class="sort-item" data-sort="hot">热门推荐</span>
+        <span class="sort-item" data-sort="mileageAsc">里程最少</span>
+      </div>
+      <div class="result-count">共找到 <b id="resultCount">0</b> 台符合条件的车源</div>
+    </div>
+
+    <!-- ===================== 车辆列表 ===================== -->
+    <div class="car-grid" id="carList" style="margin-top:20px"></div>
+
+    <!-- 分页 -->
+    <div class="pagination" id="pagination"></div>
+
+  </div>
+</main>
+
+<!-- ============ 页脚 ============ -->
+<footer id="siteFooter"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/list.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>优车汇 - 全国二手车严选平台 | 259项检测 · 一年质保 · 7天可退</title>
+<meta name="keywords" content="二手车,二手车交易,二手车买卖,准新车,新能源二手车,豪华二手车,二手车分期">
+<meta name="description" content="优车汇二手车平台，2万台严选车源，259项第三方检测，一年或2万公里质保，7天无理由退车，支持低首付分期，全国200+城市线下门店。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="index">
+
+<!-- ============ 顶部导航（由 main.js 统一渲染） ============ -->
+<header id="siteHeader"></header>
+
+<main class="page-main">
+
+  <!-- ===================== 1. 首屏 Banner 轮播 ===================== -->
+  <section class="banner" id="banner" aria-label="促销活动轮播">
+    <div class="banner-track" id="bannerTrack"><!-- JS 渲染轮播项 --></div>
+    <button class="banner-arrow banner-prev" id="bannerPrev" aria-label="上一张">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="banner-arrow banner-next" id="bannerNext" aria-label="下一张">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="banner-dots" id="bannerDots"></div>
+    <!-- 平台数据条 -->
+    <div class="banner-stats">
+      <div class="container">
+        <div class="banner-stat"><b id="statCars">2.1<em>万台</em></b><span>在售严选车源</span></div>
+        <div class="banner-stat"><b>259<em>项</em></b><span>第三方专业检测</span></div>
+        <div class="banner-stat"><b>200<em>+</em></b><span>覆盖城市门店</span></div>
+        <div class="banner-stat"><b>4.9<em>分</em></b><span>用户综合满意度</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2. 品牌快捷筛选栏 ===================== -->
+  <section class="quick-filter" aria-label="品牌快捷入口">
+    <div class="container">
+      <div class="quick-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;stroke:#0F3460"><path d="M3 5h18"/><path d="M6 12h12"/><path d="M10 19h4"/></svg>
+        按品牌找车
+      </div>
+      <div class="brand-scroller" id="brandScroller"><!-- JS 渲染品牌入口 --></div>
+    </div>
+  </section>
+
+  <!-- ===================== 3. 车源分区 ===================== -->
+  <section class="section" id="zones">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">严选车源<small>Selected Vehicles</small></h2>
+          <p class="section-sub">259 项检测合格、手续齐全、车况透明的优质二手车源，每天 10:00 更新</p>
+        </div>
+        <a class="section-more" href="list.html">查看全部车源 →</a>
+      </div>
+      <!-- 专区切换 -->
+      <div class="zone-tabs mb24" id="zoneTabs"></div>
+      <!-- 车源卡片 -->
+      <div class="car-grid" id="zoneGrid"></div>
+      <div class="text-center mt24">
+        <a href="list.html" class="btn btn-outline btn-lg">浏览全部 2 万台车源</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4. 购车服务保障 ===================== -->
+  <section class="section section-soft" id="service">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">购车服务保障<small>Service Guarantee</small></h2>
+          <p class="section-sub">从选车到过户，优车汇为每一台车提供全流程服务保障，让二手车交易不再有后顾之忧</p>
+        </div>
+        <a class="section-more" href="service.html">了解服务详情 →</a>
+      </div>
+      <div class="service-grid" id="serviceGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===================== 5. 豪华车专区促销横幅 ===================== -->
+  <section class="section" style="padding-bottom:0">
+    <div class="container">
+      <div class="promo-strip">
+        <div style="position:relative;z-index:2">
+          <h3>豪华品牌二手车 · 立省 15 万起</h3>
+          <p>宝马 / 奔驰 / 奥迪 / 保时捷 / 路虎等准新豪华车，原厂质保随车转移，一年 2 万公里官方质保，支持全国联保与异地交付。</p>
+          <a href="list.html?sections=豪华车专区" class="btn btn-accent btn-lg">进入豪华车专区</a>
+          <a href="list.html?fuel=纯电" class="btn btn-ghost btn-lg" style="margin-left:10px">看看新能源车源</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 6. 线下门店 ===================== -->
+  <section class="section" id="stores">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">线下门店<small>Offline Stores</small></h2>
+          <p class="section-sub">全国 200+ 城市服务网点，支持到店看车、上门验车、异地交付与代办过户</p>
+        </div>
+        <a class="section-more" href="store.html">查看全部门店 →</a>
+      </div>
+      <div class="store-grid" id="storeGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===================== 7. 购车四步流程 ===================== -->
+  <section class="section section-soft" id="process">
+    <div class="container">
+      <div class="section-head" style="justify-content:center;text-align:center">
+        <div style="width:100%">
+          <h2 class="section-title">购车四步流程<small>How It Works</small></h2>
+          <p class="section-sub">透明、高效、有保障，四步完成二手车交易</p>
+        </div>
+      </div>
+      <div class="process-wrap" id="processWrap"></div>
+    </div>
+  </section>
+
+  <!-- ===================== 8. 资讯 / 购车攻略 ===================== -->
+  <section class="section" id="news">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">购车攻略与避坑指南<small>News &amp; Guide</small></h2>
+          <p class="section-sub">资深评估师与行业编辑整理的二手车选购知识，帮你避开交易中的每一个坑</p>
+        </div>
+        <a class="section-more" href="guide.html">更多购车指南 →</a>
+      </div>
+      <div class="news-grid" id="newsGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ 页脚（由 main.js 统一渲染） ============ -->
+<footer id="siteFooter"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
