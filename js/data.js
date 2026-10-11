@@ -6,7 +6,8 @@
  *   2) 品牌 / 车系 / 车型库 —— 覆盖燃油、油电混动、插电混动、纯电，1万~80万
  *   3) 车源生成器          —— 依据车型指导价 + 车龄折旧 + 车况系数，生成 70+ 台车
  *   4) 门店 / 资讯 / 服务 / 检测项 / 政策 等静态业务数据
- *   5) 图片地址           —— 车型专属实拍图（按「品牌+车系」精确匹配）+ 通用平台配图，无文生图 / AI 图
+ *   5) 图片地址           —— 车型专属实拍图（按「品牌+车系」精确匹配）+ 通用平台配图；
+ *                           门店配图为本地 AI 生成的城市专属展厅图（images/stores/<门店id>.jpg），与门店信息一一对应
  * 全局出口：window.AppData
  * ========================================================================== */
 (function (global) {
@@ -509,8 +510,6 @@
     "奥迪|A6L": ["https://img.pcauto.com.cn/images/upload/upc/tx/auto5/2511/03/c17/567905837_1762139140292.jpg","https://img.pcauto.com.cn/images/upload/upc/tx/auto5/2412/18/c18/469966630_1734493692803.jpg","https://img.pcauto.com.cn/images/upload/upc/tx/auto5/2310/27/c40/388960384_1698393582297.jpg","https://img.pcauto.com.cn/images/upload/upc/tx/auto5/2310/27/c43/388960870_1698395025503.jpg","https://img.pcauto.com.cn/images/upload/upc/tx/auto5/2511/03/c17/567905570_1762139142932.jpg","https://img.pcauto.com.cn/images/upload/upc/tx/auto5/2511/06/c43/568748922_1762417937341.jpg"]
   };
 
-  /* 展厅 / 门店类配图（对应 PHOTOS 下标） */
-  var STORE_IDX = [6, 9, 10, 11, 17, 24];
   /* 资讯 / 编辑类配图 */
   var NEWS_IDX = [1, 8, 12, 14, 16, 20, 21, 22, 25, 27, 28, 29];
 
@@ -610,10 +609,10 @@
     return photoUrl(PHOTOS[NEWS_IDX[h % NEWS_IDX.length]], 640);
   }
 
-  /* 门店配图 */
+  /* 门店配图：每家门店对应的本地 AI 生成城市专属展厅图，按门店 id 一一对应（本地相对路径，无需联网） */
   function storeImage(s) {
-    var h = hashKey((s && (s.id || s.city || s.name)) || 'store');
-    return photoUrl(PHOTOS[STORE_IDX[h % STORE_IDX.length]], 720);
+    var id = (s && s.id) || 'BJ01';
+    return 'images/stores/' + id + '.jpg';
   }
 
   /* =========================================================================
