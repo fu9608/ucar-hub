@@ -312,7 +312,7 @@
           '<div class="footer-contact-item">' + icon('mail') + '<span>service@ucarhub.com</span></div>' +
           '<div class="footer-contact-item">' + icon('location') + '<span>北京市朝阳区东四环中路 78 号优车汇汽车广场 A 座</span></div>' +
           '<div class="qr-box" style="margin-top:14px"><div class="qr-img">' +
-            '<img src="' + D.sceneImage('qr code of wechat official account for a used car platform, black and white, square, high contrast, no text', 'square') + '" alt="微信公众号二维码"></div>' +
+            '<img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=6&data=https%3A%2F%2Fwww.ucarhub.com" alt="微信公众号二维码"></div>' +
             '<span>扫码关注公众号 · 每日上新</span></div>' +
         '</div>' +
       '</div>' +
